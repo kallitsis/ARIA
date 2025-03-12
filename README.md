@@ -1,2 +1,2 @@
-# ARYA
-ARYA: Artificial Intelligence for Life Cycle Assessment 
+# ARIA
+ARIA: ARtificial Intelligence for sustainability Assessment 
