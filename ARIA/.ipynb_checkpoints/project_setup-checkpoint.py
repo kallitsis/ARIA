@@ -1,13 +1,17 @@
-# project_setup.py
-
 import brightway2 as bw
+
+# Import confidential credentials from a local file.
+try:
+    from credentials import ECOINVENT_USERNAME, ECOINVENT_PASSWORD
+except ImportError:
+    raise ImportError("Please create a 'credentials.py' file with your confidential keys.")
 
 def setup_brightway_project(
     project_name: str,
-    ecoinvent_version: str = "3.10.1",
-    system_model: str = "cutoff",
-    username: str = "ICL",
-    password: str = "ICL_2019-20"
+    ecoinvent_version: str,
+    system_model: str,
+    username: str = None,
+    password: str = None
 ):
     """
     Set up the Brightway2 project environment, run bw2setup, 
@@ -20,21 +24,27 @@ def setup_brightway_project(
     ecoinvent_version : str
         Ecoinvent version to import (e.g., '3.10.1').
     system_model : str
-        The system model for the ecoinvent release (cutoff/apos/consequential).
-    username : str
-        Ecoinvent username.
-    password : str
-        Ecoinvent password.
+        The system model for the ecoinvent release (e.g., 'cutoff', 'apos', 'consequential').
+    username : str, optional
+        Ecoinvent username. If None, the value from credentials.py is used.
+    password : str, optional
+        Ecoinvent password. If None, the value from credentials.py is used.
 
     Returns
     -------
     bw.Database
         The Brightway2 database object for the imported (or existing) ecoinvent DB.
     """
+    # Use credentials from credentials.py if none provided.
+    if username is None:
+        username = ECOINVENT_USERNAME
+    if password is None:
+        password = ECOINVENT_PASSWORD
+
     # Set the current project (creates it if it doesn't exist)
     bw.projects.set_current(project_name)
     
-    # Ensure basic Brightway2 setup is performed
+    # Perform basic Brightway2 setup
     bw.bw2setup()
 
     # Construct the ecoinvent database name
@@ -44,7 +54,7 @@ def setup_brightway_project(
     if ecoinvent_db_name in bw.databases:
         print(f"'{ecoinvent_db_name}' is already present in the project '{project_name}'.")
     else:
-        # If not, import it
+        # If not, import the ecoinvent release using the provided credentials
         bw.import_ecoinvent_release(
             version=ecoinvent_version,
             system_model=system_model,
@@ -52,6 +62,7 @@ def setup_brightway_project(
             password=password
         )
         print(f"'{ecoinvent_db_name}' has been imported into the project '{project_name}'.")
-    
+
     # Return the database object for further use
     return bw.Database(ecoinvent_db_name)
+
