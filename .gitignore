@@ -1,0 +1,14 @@
+# Ignore confidential credentials file
+credentials.py
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment folders
+env/
+venv/
+
