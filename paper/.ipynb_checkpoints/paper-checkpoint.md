@@ -20,46 +20,48 @@ bibliography: paper.bib
 ---
 
 # Summary
-`ARIA` (ARtificial Intelligence for sustainability Assessment) is a Python package that allows the rapid calculation of the environmental impact of a product or process based on the life cycle assessment framework. In the sustainability analysis domain, researchers spend numerous hours trying to estimate the environmental impact of different inputs which are typically retrieved from databases, with the Ecoinvent database being by far the most widely used one (cite Ecoinvent). ARIA simplifies this process by utilising the OpenAI API (cite something) to automatically match input flows to background datasets from Ecoinvent ant perform impact assessment based on Brightway (cite brightway). The capability to process natural language enables the automatic selection of representative datasets corresponding to a product or process. 
+'ARIA' (ARtificial Intelligence for sustainability Assessment) is a Python package designed to streamline the rapid calculation of environmental impacts based on the life cycle assessment (LCA) framework. It leverages Brightway2 [@mutel2017brightway] as its core infrastructure, enabling robust LCA modeling while automating several steps that traditionally require tedious manual effort. One of ARIA’s key features is its artificial intelligence-based approach to matching foreground system inputs and outputs (often called “activities” in Brightway2) to the appropriate background datasets in LCA inventories. Rather than painstakingly searching for relevant processes in, for example, Ecoinvent [@wernet2016ecoinvent] or other databases, ARIA uses a large language model to suggest possible matches and alternative search terms, making the flow mapping process faster and less prone to errors. This automation frees LCA practitioners from manual inventory selection, one of the most time consuming steps in LCA. Once activities are connected to inventory data, ARIA seamlessly executes the impact assessment step, drawing on multiple LCIA methods available in Brightway2 to compute environmental indicators (e.g., global warming potential, acidification, water use). It then provides convenient visualisation and plotting functionality, allowing users to quickly interpret results. Overall, ARIA offers a modular, user-friendly Python interface for LCA, integrating advanced capabilities in background inventory searching and automatic impact assessment to foster reproducible, efficient sustainability evaluations.
 
 # Statement of need
-Life Cycle Assessment (LCA) is becoming an increasingly important method to analyse the environmental impact of products and processes (ref something LCA related). The methodology is described in the ISO14040/44 series of standards, detailing the four necessary steps to perform a reliable LCA: goal and scope definition, inventory analysis, impact assessment and interpretation. 
+LCA is a widely recognised methodology used to quantify the environmental impacts of products and processes throughout their life cycle (extraction of raw materials, manufacturing, distribution, use, and end-of-life). Formally described by the ISO 14040/44 standards [@finkbeiner2006new] , LCA proceeds through four main phases: (1) goal and scope definition, (2) inventory analysis, (3) impact assessment, and (4) interpretation.
 
-[insert figure about LCA stages and description]
+Within the LCA practitioner community, inventory analysis has long been identified as one of the most time-consuming and expertise-intensive steps. Researchers often spend large amounts of time searching for appropriate background processes, especially in extensive databases such as Ecoinvent [@wernet2016ecoinvent]. For instance, if a practitioner has identified that their product system requires x kWh of electricity or y kg of a particular chemical, they must manually locate representative datasets that match these inputs. This step is critical but tedious, as one needs to find the correct dataset with the right geographical, technological, and temporal scope—often requiring domain knowledge of both LCA and the specific product system.
 
-Arguably, the most time consuming phase of an LCA is the inventory analysis phase, where practitioners write down all the inputs and outputs of a process and try to find datasets to represent them. For example, if a process uses electricity, the LCA practitioner needs to write down how much electricity is consumed by the process and try to find a dataset that represents the embodied environmental impact of the type of electricity that is supplied to the process. Given that numerous flows are typically associated with a product, matching background data to each one of them is a very time consuming step. 
+Brightway2 [@mutel2017brightway] is a powerful, open-source LCA framework that provides researchers the flexibility to model highly specific scenarios and directly interface with the Ecoinvent database. However, it is aimed primarily at advanced users with coding experience and deep understanding of LCA principles. Newcomers can face a steep learning curve, especially if they need to script large-scale inventory analyses or iterative model refinements.
 
-In the LCA community, Brightway has emerged as the dominant open-source software to conduct an LCA. It provides flexibility and modularity, and seamlessly integrates with the Ecoinvent database. However, Brightway is more targeted towards the advanced LCA practitioner, presenting a high barrier to entry given that it is targeted towards users that are both experienced LCA practitioners and skilled coders. 
+ARIA (ARtificial Intelligence for sustainability Assessment) addresses this barrier to entry by integrating Brightway2 with a natural language processing (NLP) layer—leveraging the OpenAI API. Rather than manually matching each input flow (for example, n kg of an alloy or a certain volume of waste stream) to a background dataset, ARIA automates the search and matching process. It utilises a language model to propose suitable dataset candidates, even suggesting alternative search terms when straightforward matches cannot be found. This significantly reduces the time and expertise required during the inventory analysis phase, cutting typical LCA modeling from weeks to just hours.
 
-LCA is primarily a quantitative method used to evaluate the environmental impacts of a product's life cycle. However, LCA also has qualitative aspects that play a significant role in its application and interpretation. For example, during goal and scope definition the practitioner defines what is the geogrphical focus, the product under study and its technological dimensions. All this qualitative information will later influence the type of data that is used in inventory analysis. 
+Moreover, ARIA’s automation extends beyond simply searching for ecoinvent processes: it incorporates user-defined rules and context derived from the goal and scope definition (such as geographical focus or production vs. waste treatment). By guiding the language model with these rules, ARIA can refine which datasets best represent the user’s specific product system. This qualitative dimension, where the practitioner’s context and decisions influence dataset selection, is frequently overlooked by purely quantitative tools.
 
-'ARIA' aims to reduce the barrier to entry for life cycle modelling. It was developed out of a need to perform rapid calculation of the environmental impact of battery recycling as part of the Faraday Institution ReLiB project, to guide process development in the lab.  Reduce the time of LCA inventory analysis from weeks to hours.
-[expand on statement of need]
+Originally developed to meet the need for rapid, iterative LCA in the Faraday Institution’s ReLiB project on battery recycling, ARIA’s applicability extends to a broad range of industrial or academic LCA tasks. It accelerates inventory analysis, encourages reproducibility (by storing key data in spreadsheets and code), and fosters broader adoption of LCA for sustainability decision-making. By linking domain knowledge, artificial intelligence, and open-source LCA software, ARIA dramatically lowers the barrier to performing robust environmental impact assessments for existing and emerging technologies.
 
-# ARIA Operating Principles
+
+# Operating Principles
 ## Importing inventory data
-'ARIA' has been developed to automate the calculation of environmental impacts associated with a product or process. The 
+ARIA has been developed to automate the calculation of environmental impacts for a product or process. Rather than manually mapping each flow (e.g., material, energy use, transport) to an LCA dataset, ARIA integrates Brightway2 with AI-based search and refinement to streamline inventory analysis and impact assessment. Figure 1 provides a conceptual overview.
 
+![Figure 1: Flowchart of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.](figures/aria_workflow.gv.png)
 
-Therefore, the user needs to fill in the aggregate amount of inputs related to their product system per functional unit in the form of an xlsx spreadsheet 'data_inputs.xlsx'. This includes any mass and energy flows, transportation and facility requirements. Ideally, the units of each input should match the default Ecoinvent units, e.g. kg for mass, kWh for electricity, MJ for heat, a detailed list of them can be found here: (https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default).
+1. Data input (foreground system)
+The user aggregates all product system inputs (mass flows, energy requirements, transport processes, etc.) in a spreadsheet named data_inputs.xlsx. Each row corresponds to a flow (e.g., “5 kg steel,” “10 kWh electricity”), ideally using ecoinvent-compatible units (e.g., kg, kWh, MJ) [see, for example, unit group lists at European Platform on LCA https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default]. The user can also include facility requirements (e.g., inert gases, water usage) if they factor into the functional unit.
 
+2. Initial database search
+Once the data are imported, ARIA performs a first scan in the Ecoinvent database for each flow, applying filters such as location or user criteria. If a direct match is found (e.g., “market group for electricity, medium voltage” for an electricity flow), it is recorded.
 
+3. AI-Based Alternative Terms
+If no direct match appears, ARIA calls the OpenAI API [@openai_api] to generate three alternative search terms. For example, a user’s input “waste li-ion pack” might yield “spent lithium-ion batteries,” “EOL lithium-ion cell,” or “lithium-ion battery scrap.” ARIA retries the database search with these suggestions, significantly increasing the chance of finding relevant datasets. However, it is not guaranteed to produce a match in every case.
 
-Once the data are imported, a first scan is performed in the Ecoinvent database to find matching datasets for each flow, which are filtered based on user inpt and the geographical focus of the study. In the case that no results are found, the code asks ChatGPT to generate three alternative search terms associated to the text that the user inputted. While this is not a guarantee that a dataset will be found, it highly increases its likelihood. 
+4. Dataset Refinement with ChatGPT
+After a set of potential matches is identified for each flow, ARIA enters a refinement step:
 
-A refinement step is performed. Here, ChatGPT is prompted to go through all the datasets that were found for each flow, and select the most representative one. In doing so, some generic rules have been included (Figure 1) but the user is also free to fill in information related to their goal and scope definition, which would improve the refinement step overall. 
+ChatGPT is prompted with generic rules (e.g., “avoid ‘production’ datasets for a ‘waste’ flow”) and optionally with user-supplied constraints derived from the goal and scope definition.
+The language model then selects the most representative dataset from the list. Figure 1 offers a snapshot of this logic, showing how rules and user context guide ChatGPT to refine the match.
 
-[Insert figure, snapshot how ChatGPT is prompted to refine datasets]
+5. Building the inventory and performing impact assessment
+Once each foreground flow is matched to a background dataset, ARIA prints a DataFrame showing all necessary information, i.e. name, location, quantity, etc. Next, it automatically performs life cycle impact assessment using Brightway2. By default, EF v3.1 is employed as the impact method (being one of the more recent methods available), but the user can specify any Brightway-supported LCIA method. ARIA calculates each flow’s contribution to environmental indicators (e.g., global warming potential, acidification, ecotoxicity) and plots the aggregated results for easy visualisation.
 
-After some data processing, the dataframe containing all the necessary information associated with inventory analysis is printed. Next, the code utilises brightway to perform life cycle impact assessment. EF v3.1 has been used as the default impact assessment method, as it is the most up-to-date method (insert ref) but the user is flexible to change it to any method supported by brightway. The calculation of the environmental impact for each flow is then performed for all environmental impact categories and the results are plotted. 
+#References
 
-[include a battery example]
-
-## Example of Lithium-ion batteries
-Use Kallitsis et al. (2024) BOM and compare results. 
-
-
-## Limitations and future potential
 
 
 
