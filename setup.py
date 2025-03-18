@@ -11,6 +11,6 @@ setup(
     install_requires=requirements,
     author='Dr Evangelos Kallitsis',
     author_email='vkallitsis@outlook.com',
-    description='Brief description of ARIA project',
-    url='https://github.com/username/aria',
+    description='ARIA: Artificial Intelligence for Sustainability Assessment',
+    url='https://github.com/kallitsis/aria',
 )
