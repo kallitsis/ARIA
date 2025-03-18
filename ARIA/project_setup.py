@@ -1,4 +1,11 @@
-import brightway2 as bw
+# project_setup.py
+
+try:
+    import brightway2 as bw
+except ModuleNotFoundError as e:
+    raise ModuleNotFoundError(
+        "Brightway2 is not installed. Please run 'pip install brightway2' in your environment."
+    ) from e
 
 # Import confidential credentials from a local file.
 try:
