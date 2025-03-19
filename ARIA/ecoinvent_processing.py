@@ -21,7 +21,7 @@ def process_ecoinvent_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     # Function to clean the text in the 'Ecoinvent process' column
     def clean_text(text: str) -> str:
         # Allow word characters, spaces, commas, slashes, and hyphens
-        text = re.sub(r"[^\w\s,/%\-]", '', text)
+        text = re.sub(r"[^\w\s,/%\-.]", '', text)
         return text.strip()
 
     # Clean the 'Ecoinvent process' column

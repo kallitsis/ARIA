@@ -82,7 +82,7 @@ def run_impact_assessment(
                     continue
 
                 # Adjust by the 'In/out' quantity
-                adjusted_impact = row["In/out"] * lca.score
+                adjusted_impact = abs(row["In/out"] * lca.score)
 
                 if "global warming potential (GWP100)" in method[2]:
                     processed_df.at[idx, "GWP"] = adjusted_impact

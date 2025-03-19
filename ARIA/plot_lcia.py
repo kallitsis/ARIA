@@ -67,7 +67,7 @@ def plot_lcia_waterfall_charts(processed_df: pd.DataFrame) -> None:
         # Filter out NaN rows for this particular indicator and sort
         filtered_df = processed_df.dropna(subset=[col]).sort_values(by=col, ascending=False)
         if filtered_df.empty:
-            print(f"No non-NaN data found for indicator '{col}'. Skipping chart.")
+            print(f"No data found for indicator '{col}'. Skipping chart.")
             continue
 
         processes = filtered_df['Process'].values
