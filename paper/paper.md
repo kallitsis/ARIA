@@ -5,7 +5,7 @@ tags:
     - life cycle assessment
     - sustainability analysis
     - environmental impact
-    - natural language processing
+    - large language models
     - artificial intelligence
 authors:
     - name: Evangelos Kallitsis
@@ -20,14 +20,12 @@ bibliography: paper.bib
 ---
 
 # Summary
-'ARIA' (ARtificial Intelligence for sustainability Assessment) is a Python package designed to streamline the rapid calculation of environmental impacts based on the life cycle assessment (LCA) framework. It leverages Brightway2 [@mutel2017brightway] as its core infrastructure, enabling robust LCA modeling while automating several steps that traditionally require tedious manual effort. One of ARIA’s key features is its artificial intelligence-based approach to matching foreground system inputs and outputs (often called “activities” in Brightway2) to the appropriate background datasets in LCA inventories. Rather than painstakingly searching for relevant processes in, for example, Ecoinvent [@wernet2016ecoinvent] or other databases, ARIA uses a large language model to suggest possible matches and alternative search terms, making the flow mapping process faster and less prone to errors. This automation frees LCA practitioners from manual inventory selection, one of the most time consuming steps in LCA. Once activities are connected to inventory data, ARIA seamlessly executes the impact assessment step, drawing on multiple LCIA methods available in Brightway2 to compute environmental indicators (e.g., global warming potential, acidification, water use). It then provides convenient visualisation and plotting functionality, allowing users to quickly interpret results. Overall, ARIA offers a modular, user-friendly Python interface for LCA, integrating advanced capabilities in background inventory searching and automatic impact assessment to foster reproducible, efficient sustainability evaluations.
+'ARIA' (Artificial Intelligence for Sustainability Assessment) is a Python package designed to streamline the rapid calculation of environmental impacts based on the life cycle assessment (LCA) framework. It leverages Brightway2 [@mutel2017brightway] as its core infrastructure, enabling robust LCA modeling while automating several steps that traditionally require tedious manual effort. One of ARIA’s key features is its artificial intelligence-based approach to matching foreground system inputs and outputs (often called “activities” in Brightway2) to the appropriate background datasets in LCA inventories. Rather than painstakingly searching for relevant processes in, for example, Ecoinvent [@wernet2016ecoinvent] or other databases, ARIA uses a large language model to suggest possible matches and alternative search terms, making the flow mapping process faster and less prone to errors. This automation frees LCA practitioners from manual inventory selection, one of the most time consuming steps in LCA. Once activities are connected to inventory data, ARIA seamlessly executes the impact assessment step, drawing on multiple LCIA methods available in Brightway2 to compute environmental indicators (e.g., global warming potential, acidification, water use). It then provides convenient visualisation and plotting functionality, allowing users to quickly interpret results. Overall, ARIA offers a modular, user-friendly Python interface for LCA, integrating advanced capabilities in background inventory searching and automatic impact assessment to foster reproducible, efficient sustainability evaluations.
 
 # Statement of need
-LCA is a widely recognised methodology used to quantify the environmental impacts of products and processes throughout their life cycle (extraction of raw materials, manufacturing, distribution, use, and end-of-life). Formally described by the ISO 14040/44 standards [@finkbeiner2006new] , LCA proceeds through four main phases: (1) goal and scope definition, (2) inventory analysis, (3) impact assessment, and (4) interpretation.
+Life Cycle Assessment (LCA) is a methodology that quantitatively and qualitatively evaluates the environmental impacts of products and processes across their entire life cycle—from raw material extraction, manufacturing, and distribution to use and end-of-life. Formally described by the ISO 14040/44 standards [@finkbeiner2006new], LCA typically proceeds through four main phases: (1) goal and scope definition, (2) inventory analysis, (3) impact assessment, and (4) interpretation. Although LCA is highly quantitative, it inherently involves qualitative judgments associated with the goal and scope definition. For example, practitioners must define the product under study and the geographical focus in order to select datasets that best represent their product system during the inventory analysis phase. This dual nature of the methodology has traditionally required extensive manual effort and deep domain expertise.
 
 Within the LCA practitioner community, inventory analysis has long been identified as one of the most time-consuming and expertise-intensive steps. Researchers often spend large amounts of time searching for appropriate background processes, especially in extensive databases such as Ecoinvent [@wernet2016ecoinvent]. For instance, if a practitioner has identified that their product system requires x kWh of electricity or y kg of a particular chemical, they must manually locate representative datasets that match these inputs. This step is critical but tedious, as one needs to find the correct dataset with the right geographical, technological, and temporal scope—often requiring domain knowledge of both LCA and the specific product system.
-
-Brightway2 [@mutel2017brightway] is a powerful, open-source LCA framework that provides researchers the flexibility to model highly specific scenarios and directly interface with the Ecoinvent database. However, it is aimed primarily at advanced users with coding experience and deep understanding of LCA principles. Newcomers can face a steep learning curve, especially if they need to script large-scale inventory analyses or iterative model refinements.
 
 ARIA (ARtificial Intelligence for sustainability Assessment) addresses this barrier to entry by integrating Brightway2 with a natural language processing (NLP) layer—leveraging the OpenAI API. Rather than manually matching each input flow (for example, n kg of an alloy or a certain volume of waste stream) to a background dataset, ARIA automates the search and matching process. It utilises a language model to propose suitable dataset candidates, even suggesting alternative search terms when straightforward matches cannot be found. This significantly reduces the time and expertise required during the inventory analysis phase, cutting typical LCA modeling from weeks to just hours.
 
@@ -37,7 +35,6 @@ Originally developed to meet the need for rapid, iterative LCA in the Faraday In
 
 
 # Operating Principles
-## Importing inventory data
 ARIA has been developed to automate the calculation of environmental impacts for a product or process. Rather than manually mapping each flow (e.g., material, energy use, transport) to an LCA dataset, ARIA integrates Brightway2 with AI-based search and refinement to streamline inventory analysis and impact assessment. Figure 1 provides a conceptual overview.
 
 ![Figure 1: Flowchart of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.](figures/aria_workflow.gv.png)
@@ -60,7 +57,10 @@ The language model then selects the most representative dataset from the list. F
 5. Building the inventory and performing impact assessment
 Once each foreground flow is matched to a background dataset, ARIA prints a DataFrame showing all necessary information, i.e. name, location, quantity, etc. Next, it automatically performs life cycle impact assessment using Brightway2. By default, EF v3.1 is employed as the impact method (being one of the more recent methods available), but the user can specify any Brightway-supported LCIA method. ARIA calculates each flow’s contribution to environmental indicators (e.g., global warming potential, acidification, ecotoxicity) and plots the aggregated results for easy visualisation.
 
-#References
+# Acknowledgments
+This work was supported by the Faraday Institution ReLiB project (grant number FIRG057).
+
+# References
 
 
 
