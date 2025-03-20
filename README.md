@@ -1,2 +1,1 @@
-# ARIA
-ARIA: ARtificial Intelligence for sustainability Assessment 
+**ARIA**: **AR**tificial **I**ntelligence for Sustainability **A**ssessment 
