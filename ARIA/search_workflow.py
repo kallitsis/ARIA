@@ -109,8 +109,6 @@ def process_dataframe(
                     note_text = row.get("Notes", "").strip()
                     if note_text:
                         extra_instructions = note_text
-                if user_message:
-                    extra_instructions = (extra_instructions + " " + user_message).strip() if extra_instructions else user_message.strip()
                 
                 alternative_terms = get_alternative_search_terms(client, activity_name, extra_instructions=extra_instructions)
                 if alternative_terms:
@@ -144,7 +142,7 @@ def process_dataframe(
         # -----------------------
         # Build the complete prompt for ChatGPT using the (possibly refined) results_string.
         prompt_content = (
-            f"The Ecoinvent database found the following results:\n'{results_string}'\n"
+            f"Given the user instructions: '{user_message}', help choose one dataset to be used for '{activity_name}' from the Ecoinvent database. Follow these rules:\n"
             f"related to '{activity_name}'.\n"
             f"Choose one dataset to be used for '{activity_name}' under the following rules:\n"
             f"1. If they exist, give highest preference to datasets that include the exact term '{activity_name}'.\n"
