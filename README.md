@@ -19,7 +19,7 @@ ARIA is a Python package designed to streamline the rapid calculation of environ
 
 ## Installation
 
-ARIA is released under the [INSERT LICENSE NAME HERE] license and is open source. To install ARIA, clone the repository and install it in editable mode:
+ARIA is released under the [BSD 3-Clause License] license and is open source. To install ARIA, clone the repository and install it in editable mode:
 
 ```bash
 git clone https://github.com/kallitsis/ARIA.git
