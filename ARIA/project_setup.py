@@ -1,4 +1,5 @@
 # project_setup.py
+import os
 
 try:
     import brightway2 as bw
@@ -7,12 +8,17 @@ except ModuleNotFoundError as e:
         "Brightway2 is not installed. Please run 'pip install brightway2' in your environment."
     ) from e
 
-# Import confidential credentials from a local file.
-try:
-    from credentials import ECOINVENT_USERNAME, ECOINVENT_PASSWORD
-except ImportError:
-    raise ImportError("Please create a 'credentials.py' file with your confidential keys.")
+# First, try to fetch credentials from environment variables
+ECOINVENT_USERNAME = os.getenv('ECOINVENT_USERNAME')
+ECOINVENT_PASSWORD = os.getenv('ECOINVENT_PASSWORD')
 
+# If not set in environment, try to load from credentials.py
+if ECOINVENT_USERNAME is None or ECOINVENT_PASSWORD is None:
+    try:
+        from credentials import ECOINVENT_USERNAME, ECOINVENT_PASSWORD
+    except ImportError:
+        raise ImportError("Please create a 'credentials.py' file with your confidential keys.")
+        
 def setup_brightway_project(
     project_name: str,
     ecoinvent_version: str,

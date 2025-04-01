@@ -2,11 +2,15 @@
 import openai
 import os
 
-# Try to load the default API key from credentials.py
-try:
-    from credentials import OPENAI_API_KEY as default_api_key
-except ImportError:
-    default_api_key = None
+# Try to load the default API key from the environment variable first
+default_api_key = os.getenv("OPENAI_API_KEY")
+
+# If not set in environment, try to load from credentials.py
+if default_api_key is None:
+    try:
+        from credentials import OPENAI_API_KEY as default_api_key
+    except ImportError:
+        default_api_key = None
 
 def create_openai_client(api_key: str = None):
     """
