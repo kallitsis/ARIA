@@ -1,4 +1,4 @@
-[![CI](https://github.com/kallitsis/ARIA/actions/workflows/python-app.yml/badge.svg)](https://github.com/kallitsis/ARIA/actions/workflows/python-app.yml)
+[![Python application](https://github.com/kallitsis/ARIA/actions/workflows/python-app.yml/badge.svg)](https://github.com/kallitsis/ARIA/actions/workflows/python-app.yml)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 # **ARIA**: **AR**tificial **I**ntelligence for Sustainability **A**ssessment 
 
