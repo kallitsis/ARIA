@@ -9,8 +9,8 @@ description = "ARIA: Artificial Intelligence for Sustainability Assessment"
 authors = [
     { name = "Dr Evangelos Kallitsis", email = "vkallitsis@outlook.com" },
 ]
-requires-python = ">=3.11,<3.13"
-license = { file = "LICENSE" }
+requires-python = ">=3.11,<=3.13.2" 
+license = "BSD-3-Clause"
 readme = {file = "README.md", content-type = "text/markdown"}
 dependencies = [
     "brightway2>=2.4.6",
@@ -28,8 +28,11 @@ homepage = "https://github.com/kallitsis/aria"
 repository = "https://github.com/kallitsis/aria"
 
 [project.optional-dependencies]
-   test = [
-        "pytest>=8.3.5",
-    ]
+test = [
+    "pytest>=8.3.5",
+]
+
+[tool.setuptools]
+packages = { find = { where = ["ARIA"] } }
 
 [tool.pip-tools]
