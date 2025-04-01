@@ -9,7 +9,7 @@ description = "ARIA: Artificial Intelligence for Sustainability Assessment"
 authors = [
     { name = "Dr Evangelos Kallitsis", email = "vkallitsis@outlook.com" },
 ]
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<=3.13.2" 
 license = "BSD-3-Clause"
 readme = {file = "README.md", content-type = "text/markdown"}
 dependencies = [
