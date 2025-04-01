@@ -32,5 +32,8 @@ jobs:
         echo "ECOINVENT_PASSWORD=${{ secrets.ECOINVENT_PASSWORD }}" >> $GITHUB_ENV
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
     - name: Run tests with pytest
-      run: python -m pytest
+      shell: bash 
+      run: |
+        echo "Python version: $(python --version)"
+        python -m pytest -v --maxfail=5 --tb=short
 
