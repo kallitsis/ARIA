@@ -33,6 +33,6 @@ test = [
 ]
 
 [tool.setuptools]
-find_namespace_packages = {where = "src"}  # Adjust this depending on your project structure
+packages = { find = { where = ["ARIA"] } }
 
 [tool.pip-tools]
