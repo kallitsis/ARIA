@@ -6,6 +6,7 @@
 
 ARIA is a Python package designed to streamline the rapid calculation of environmental impacts based on the Life Cycle Assessment (LCA) framework. By leveraging Brightway2 as its core infrastructure and integrating AI-based search and refinement, ARIA automates many of the tedious manual steps in inventory analysis—significantly reducing the time and expertise required for LCA studies.
 
+ARIA is documented [here](https://github.com/kallitsis/ARIA/wiki). Examples are stored [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples). 
 ## Overview
 
 - **Automated Inventory Analysis:**  
