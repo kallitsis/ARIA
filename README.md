@@ -60,7 +60,7 @@ $env:ECOINVENT_USERNAME="your_username"
 $env:ECOINVENT_PASSWORD="your_password"
 $env:OPENAI_API_KEY="your_api_key"
 ```
-
+You will also need a Data_inputs.xlsx file which aggregates the life cycle inventory per functional unit in tabular format. The file should include four columns as default, **Input/output** listing any flows (activities), **In/out** listing the corresponding amount for each flow, **Units** in [default Ecoinvent format](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default) and **Notes** providing any additional instructions for AI-based matching. Example files are shown [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples).  
 
 ## License
 
