@@ -87,7 +87,7 @@ client = create_openai_client(OPENAI_API_KEY)
 
 processed_df = process_dataframe(
     data_frame,
-    db=db,
+    db=ecoinvent_db,
     client=openai,
     system_message="You are an LCA domain expert. Please pick the best match.", #Optionally, add specific information related to your goal and scope definition or instructions on how to select datasets
     locations=["GLO", "RoW"] #Add any locations of focus based on Ecoinvent country codes
