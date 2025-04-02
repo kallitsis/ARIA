@@ -61,7 +61,7 @@ The large language model then selects the most representative dataset from the l
 Once each foreground flow is matched to a background dataset, ARIA prints a DataFrame showing all necessary information, i.e. name, location, quantity, etc. Next, it automatically performs life cycle impact assessment using Brightway2. By default, the Environmental Footprint v3.1 characterisation method [@andreasi2023updated] is implemented, being one of the more recent methods available), but the user can specify any Brightway-supported impact assessment method. ARIA calculates each flow’s contribution to environmental indicators (e.g., global warming potential, acidification, ecotoxicity) and plots waterfall charts for easy visualisation.
 
 # Acknowledgments
-This work was supported by the Faraday Institution ReLiB project (grant number FIRG057). Add RSE
+This work was financially supported by the Faraday Institution ReLiB project (grant number FIRG057). Support from the Imperial College London Research Software Engineering (RSE) is acknowledged. 
 
 # References
 
