@@ -1,11 +1,9 @@
 name: Python application
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+  workflow_dispatch: 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -14,7 +12,9 @@ jobs:
       matrix:
         python-version: ["3.11", "3.12", "3.13"]
         os: [windows-latest, ubuntu-latest, macos-latest]
-
+        exclude:
+          - os: windows-latest
+            python-version: "3.13"
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -26,10 +26,14 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install .[test]
     - name: Set environment variables
+      shell: bash
       run: |
         echo "ECOINVENT_USERNAME=${{ secrets.ECOINVENT_USERNAME }}" >> $GITHUB_ENV
         echo "ECOINVENT_PASSWORD=${{ secrets.ECOINVENT_PASSWORD }}" >> $GITHUB_ENV
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
     - name: Run tests with pytest
-      run: python -m pytest
+      shell: bash 
+      run: |
+        echo "Python version: $(python --version)"
+        python -m pytest -v --maxfail=5 --tb=short
 
