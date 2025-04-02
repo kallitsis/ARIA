@@ -26,14 +26,21 @@ ARIA comes with detailed [documentation](https://github.com/kallitsis/ARIA/wiki)
 
 ## Installation
 
- To install ARIA, clone the repository and install it in editable mode:
+To install ARIA using `pip`, run the following command:
 
+```bash
+pip install ARIA
 ```
-bash
-git clone https://github.com/kallitsis/ARIA.git
-cd ARIA
-pip install -e .
+
+or clone it in your machine:
+
+```bash
+git clone https://github.com/kallitsis/aria.git
+cd aria
+pip install .
 ```
+
+---
 
 ## License
 
