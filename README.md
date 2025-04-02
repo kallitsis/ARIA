@@ -85,9 +85,14 @@ from ARIA.search_workflow import process_dataframe
 
 client = create_openai_client(OPENAI_API_KEY)
 
-processed_df = process_dataframe(data_frame, db=ecoinvent_db, client=client)
+processed_df = process_dataframe(
+    data_frame,
+    db=db,
+    client=openai,
+    system_message="You are an LCA domain expert. Please pick the best match.", #Optionally, add specific information related to your goal and scope definition or instructions on how to select datasets
+    locations=["GLO", "RoW", "UK"] #Add any locations of focus based on Ecoinvent country codes
+)
 ```
-
 
 ## License
 
