@@ -37,4 +37,4 @@ pip install -e .
 
 ## License
 
-ARIA is released under a [BSD 3-Clause License](LICENSE.md) and is fully open source.
+ARIA is released under a [BSD 3-Clause License](LICENSE) and is fully open source.
