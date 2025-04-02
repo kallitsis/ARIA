@@ -9,13 +9,13 @@ ARIA is a Python package designed to streamline the rapid calculation of environ
 ## Overview
 
 - **Automated Inventory Analysis:**  
-  ARIA automatically matches user-supplied inputs with background datasets (e.g., from Ecoinvent) using natural language processing.
+  ARIA automatically matches user-supplied inputs with background datasets from Ecoinvent using natural language processing.
 - **Brightway2 Integration:**  
   Provides a robust and reproducible LCA modelling environment.
 - **AI-Powered Refinement:**  
   Uses the OpenAI API to generate search terms and select representaive background daasets based on detailed rules and contextual instructions.
 - **Flexible Impact Assessment:**  
-  Supports multiple LCIA methods (default: EF v3.1) to compute key environmental indicators such as global warming potential, acidification, and water use.
+  Supports multiple impact assessment methods (default: EF v3.1) to calculate key environmental indicators such as global warming potential, acidification, and water use.
 - **Visualisation:**  
   Generates plots and DataFrames for easy interpretation of results.
 - **Modular Design:**  
