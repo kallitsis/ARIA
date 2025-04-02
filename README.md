@@ -46,7 +46,8 @@ Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Pur
 
 ## Quick start
 
-To start using ARIA, you will need to [create a credentials.py](https://github.com/kallitsis/ARIA/wiki/Quick-start-guide) file which securely stores your Ecoinvent credentials and OpenAI API key to your local machine. Alternatively, you can set these up as environment variables: 
+To start using ARIA, you will need to [create a credentials.py](https://github.com/kallitsis/ARIA/wiki/Quick-start-guide) file which securely stores your Ecoinvent credentials and OpenAI API key to your local machine. Alternatively, you can set these up as environment variables.
+
 For Linux/macOS:
 ```bash
 export ECOINVENT_USERNAME="your_username"
