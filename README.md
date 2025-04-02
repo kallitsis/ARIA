@@ -46,7 +46,6 @@ Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Pur
 
 ## Quick start
 
-### 1️⃣ **Setting up credentials**
 To start using ARIA, you will need to [create a credentials.py](https://github.com/kallitsis/ARIA/wiki/Quick-start-guide) file which securely stores your Ecoinvent credentials and OpenAI API key to your local machine. Alternatively, you can set these up as environment variables.
 
 For Linux/macOS:
@@ -61,19 +60,33 @@ $env:ECOINVENT_USERNAME="your_username"
 $env:ECOINVENT_PASSWORD="your_password"
 $env:OPENAI_API_KEY="your_api_key"
 ```
-### 2️⃣ **Setting up a Brightway project**
-Once credentials are set, initialise the **Brightway2 project** and load the **Ecoinvent database** of your choice:
-You can now setup a Brightway2 project and load the Ecoinvent database of your choice:
-```python
-   from ARIA.project_setup import setup_brightway_project
-   project_name = "my brightway project"  # change this to your desired project name
-   ecoinvent_version = "3.10.1"           # change this to your preferred version
-   system_model = "cutoff"                # change this to "cutoff", "apos", or "consequential"
-   ecoinvent_db = setup_brightway_project(project_name, ecoinvent_version, system_model)
-   ```
-### 3️⃣ **Loading inventory data from Excel**
-You will also need a Data_inputs.xlsx file which aggregates the life cycle inventory per functional unit in tabular format. The file should include four columns as default, **Input/output** listing any flows (activities), **In/out** listing the corresponding amount for each flow, **Units** in [default Ecoinvent format](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default) and **Notes** providing any additional instructions for AI-based matching. Example files are shown [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples).  
 
+Once credentials are set, initialise the **Brightway2 project** and load the **Ecoinvent database** of your choice:
+```python
+from ARIA.project_setup import setup_brightway_project
+project_name = "my brightway project"  # change this to your desired project name
+ecoinvent_version = "3.10.1"           # change this to your preferred version
+system_model = "cutoff"                # change this to "cutoff", "apos", or "consequential"
+ecoinvent_db = setup_brightway_project(project_name, ecoinvent_version, system_model)
+   ```
+
+You will also need a Data_inputs.xlsx file which aggregates the life cycle inventory per functional unit in tabular format. The file should include four columns as default, **Input/output** listing any flows (activities), **In/out** listing the corresponding amount for each flow, **Units** in [default Ecoinvent format](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default) and **Notes** providing any additional instructions for AI-based matching. Example files are shown [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples).  
+```python
+from ARIA.data_handling import open_excel_with_applescript, read_and_clean_excel
+file_path = "/path/to/your/file.xlsx"
+data_frame = read_and_clean_excel(file_path)
+```
+
+With inventory data loaded and cleaned, you can initialise the OpenAI client and run the analysis to aytomatically match inventory flows with ecoinvent datasets.
+```python
+from ARIA.openai_client import create_openai_client
+from credentials import OPENAI_API_KEY
+from ARIA.search_workflow import process_dataframe
+
+client = create_openai_client(OPENAI_API_KEY)
+
+processed_df = process_dataframe(data_frame, db=ecoinvent_db, client=client)
+```
 
 
 ## License
