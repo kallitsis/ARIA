@@ -62,6 +62,15 @@ $env:OPENAI_API_KEY="your_api_key"
 ```
 You will also need a Data_inputs.xlsx file which aggregates the life cycle inventory per functional unit in tabular format. The file should include four columns as default, **Input/output** listing any flows (activities), **In/out** listing the corresponding amount for each flow, **Units** in [default Ecoinvent format](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default) and **Notes** providing any additional instructions for AI-based matching. Example files are shown [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples).  
 
+You can now setup a Brightway2 project and load the Ecoinvent database of your choice:
+```python
+   from ARIA.project_setup import setup_brightway_project
+   project_name = "my brightway project"  # change this to your desired project name
+   ecoinvent_version = "3.10.1"           # change this to your preferred version
+   system_model = "cutoff"                # change this to "cutoff", "apos", or "consequential"
+   ecoinvent_db = setup_brightway_project(project_name, ecoinvent_version, system_model)
+   ```
+
 ## License
 
 ARIA is released under a [BSD 3-Clause License](LICENSE) and is fully open source.
