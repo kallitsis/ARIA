@@ -41,8 +41,8 @@ ARIA’s automation extends beyond simple dataset retrieval by incorporating con
 # Operating Principles
 ARIA has been developed to automate the calculation of environmental impacts for a product or process. Rather than manually mapping each flow (e.g., material, energy use, transport) to an LCA dataset, ARIA integrates Brightway2 with AI-based search and refinement to streamline inventory analysis and impact assessment. Figure 1 provides a conceptual overview.
 
-![Figure 1: Flowchart of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.](figures/aria_workflow.png)
-
+![Figure 1](figures/aria_workflow.png)
+*Figure 1: Flowchart of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.*
 1. Data input (foreground system)
 The user aggregates all product system inputs (mass flows, energy requirements, transport processes, etc.) in a spreadsheet named data_inputs.xlsx. Each row corresponds to a flow (e.g., “5 kg steel,” “10 kWh electricity”), ideally using ecoinvent-compatible units (e.g., kg, kWh, MJ) which are shown in the [European Platform on LCA website](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default). The user can also include facility requirements (e.g., inert gases, water usage) if they factor into the functional unit.
 
