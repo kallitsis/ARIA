@@ -46,6 +46,7 @@ Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Pur
 
 ## Quick start
 
+### 1️⃣ **Setting up credentials**
 To start using ARIA, you will need to [create a credentials.py](https://github.com/kallitsis/ARIA/wiki/Quick-start-guide) file which securely stores your Ecoinvent credentials and OpenAI API key to your local machine. Alternatively, you can set these up as environment variables.
 
 For Linux/macOS:
@@ -60,8 +61,8 @@ $env:ECOINVENT_USERNAME="your_username"
 $env:ECOINVENT_PASSWORD="your_password"
 $env:OPENAI_API_KEY="your_api_key"
 ```
-You will also need a Data_inputs.xlsx file which aggregates the life cycle inventory per functional unit in tabular format. The file should include four columns as default, **Input/output** listing any flows (activities), **In/out** listing the corresponding amount for each flow, **Units** in [default Ecoinvent format](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default) and **Notes** providing any additional instructions for AI-based matching. Example files are shown [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples).  
-
+### 2️⃣ **Setting up a Brightway project**
+Once credentials are set, initialise the **Brightway2 project** and load the **Ecoinvent database** of your choice:
 You can now setup a Brightway2 project and load the Ecoinvent database of your choice:
 ```python
    from ARIA.project_setup import setup_brightway_project
@@ -70,6 +71,10 @@ You can now setup a Brightway2 project and load the Ecoinvent database of your c
    system_model = "cutoff"                # change this to "cutoff", "apos", or "consequential"
    ecoinvent_db = setup_brightway_project(project_name, ecoinvent_version, system_model)
    ```
+### 3️⃣ **Loading inventory data from Excel**
+You will also need a Data_inputs.xlsx file which aggregates the life cycle inventory per functional unit in tabular format. The file should include four columns as default, **Input/output** listing any flows (activities), **In/out** listing the corresponding amount for each flow, **Units** in [default Ecoinvent format](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default) and **Notes** providing any additional instructions for AI-based matching. Example files are shown [here](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples).  
+
+
 
 ## License
 
