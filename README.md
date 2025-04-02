@@ -90,8 +90,16 @@ processed_df = process_dataframe(
     db=db,
     client=openai,
     system_message="You are an LCA domain expert. Please pick the best match.", #Optionally, add specific information related to your goal and scope definition or instructions on how to select datasets
-    locations=["GLO", "RoW", "UK"] #Add any locations of focus based on Ecoinvent country codes
-)
+    locations=["GLO", "RoW"] #Add any locations of focus based on Ecoinvent country codes
+```
+ARIA will return a dataframe with suggested Ecoinvent inventories for each flow, if they are representative, you can proceed with impact assessment and visualisation. 
+```python
+from ARIA.impact_assessment import run_impact_assessment
+from ARIA.plot_lcia import plot_lcia_waterfall_charts
+
+lcia_method = [ ... ]  # Define your methods, Environmental Footprint 3.1 default
+processed_df = run_impact_assessment(processed_df, lcia_method)
+plot_lcia_waterfall_charts(processed_df)
 ```
 
 ## License
