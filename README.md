@@ -42,7 +42,7 @@ pip install .
 ## Dependencies
 
 In order to run ARIA, you will need an active [Ecoinvent license](https://ecoinvent.org/licenses/) and an [OpenAI API key](https://platform.openai.com/account/api-keys).
-Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Purchasing-OpenAI-API-credits) to learn more about how to set this up.
+Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Purchasing-OpenAI-API-credits) to learn more about how to set this up. A full list of dependencies that will automatically be installed is shown [here](https://github.com/kallitsis/ARIA/wiki/Installation-steps).
 
 ## License
 
