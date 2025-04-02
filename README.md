@@ -44,6 +44,22 @@ pip install .
 In order to run ARIA, you will need an active [Ecoinvent license](https://ecoinvent.org/licenses/) and an [OpenAI API key](https://platform.openai.com/account/api-keys).
 Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Purchasing-OpenAI-API-credits) to learn more about how to set this up. A full list of dependencies that will automatically be installed is shown [here](https://github.com/kallitsis/ARIA/wiki/Installation-steps).
 
+## Quick start
+
+To start using ARIA, you will need to [create a credentials.py](https://github.com/kallitsis/ARIA/wiki/Quick-start-guide) file which securely stores your Ecoinvent credentials and OpenAI API key to your local machine. Alternatively, you can set these up as environment variables: 
+
+```bash
+export ECOINVENT_USERNAME="your_username"
+export ECOINVENT_PASSWORD="your_password"
+export OPENAI_API_KEY="your_api_key"
+```
+```powershell
+$env:ECOINVENT_USERNAME="your_username"
+$env:ECOINVENT_PASSWORD="your_password"
+$env:OPENAI_API_KEY="your_api_key"
+```
+
+
 ## License
 
 ARIA is released under a [BSD 3-Clause License](LICENSE) and is fully open source.
