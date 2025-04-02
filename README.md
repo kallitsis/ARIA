@@ -101,6 +101,10 @@ lcia_method = [ ... ]  # Define your methods, Environmental Footprint 3.1 defaul
 processed_df = run_impact_assessment(processed_df, lcia_method)
 plot_lcia_waterfall_charts(processed_df)
 ```
+## Citing ARIA
+
+If you use ARIA for a scientific paper, please cite our paper:
+>placeholder
 
 ## License
 
