@@ -26,9 +26,13 @@ ARIA comes with detailed [documentation](https://github.com/kallitsis/ARIA/wiki)
 
 ## Installation
 
-ARIA is released under the [BSD 3-Clause License] license and is open source. To install ARIA, clone the repository and install it in editable mode:
+ To install ARIA, clone the repository and install it in editable mode:
 
 ```bash
 git clone https://github.com/kallitsis/ARIA.git
 cd ARIA
 pip install -e .
+
+## License
+
+ARIA is released under a [BSD 3-Clause License](LICENSE.md) and is fully open source.
