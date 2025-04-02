@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/kallitsis/ARIA)
 
-# ARIA<br>Artificial Intelligence for Sustainability Assessment
+# ARIA: Artificial Intelligence for Sustainability Assessment
  
 ARIA is a Python package designed to streamline the rapid calculation of environmental impacts based on the Life Cycle Assessment (LCA) framework. By leveraging [Brightway2](https://github.com/brightway-lca) as its core infrastructure and integrating AI-based search and refinement, ARIA automates many of the tedious manual steps in inventory analysis—significantly reducing the time and expertise required for LCA studies.
 
