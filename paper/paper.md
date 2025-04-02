@@ -44,7 +44,7 @@ ARIA has been developed to automate the calculation of environmental impacts for
 ![Figure 1: Flowchart of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.](figures/aria_workflow.gv.png)
 
 1. Data input (foreground system)
-The user aggregates all product system inputs (mass flows, energy requirements, transport processes, etc.) in a spreadsheet named data_inputs.xlsx. Each row corresponds to a flow (e.g., “5 kg steel,” “10 kWh electricity”), ideally using ecoinvent-compatible units (e.g., kg, kWh, MJ) [see, for example, unit group lists at European Platform on LCA https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default]. The user can also include facility requirements (e.g., inert gases, water usage) if they factor into the functional unit.
+The user aggregates all product system inputs (mass flows, energy requirements, transport processes, etc.) in a spreadsheet named data_inputs.xlsx. Each row corresponds to a flow (e.g., “5 kg steel,” “10 kWh electricity”), ideally using ecoinvent-compatible units (e.g., kg, kWh, MJ) which are shown in the [European Platform on LCA website](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default). The user can also include facility requirements (e.g., inert gases, water usage) if they factor into the functional unit.
 
 2. Initial database search
 Once the data are imported, ARIA performs a first scan in the Ecoinvent database for each flow, applying filters such as location or user criteria. If a direct match is found (e.g., “market group for electricity, medium voltage” for an electricity flow), it is recorded.
@@ -58,7 +58,7 @@ ChatGPT is prompted with generic rules (e.g., “avoid ‘production’ datasets
 The large language model then selects the most representative dataset from the list. Figure 1 offers a snapshot of this logic, showing how rules and user context guide ChatGPT to refine the match.
 
 5. Building the inventory and performing impact assessment
-Once each foreground flow is matched to a background dataset, ARIA prints a DataFrame showing all necessary information, i.e. name, location, quantity, etc. Next, it automatically performs life cycle impact assessment using Brightway2. By default, the Environmental Footprint v3.1 characterisation method is implemented, being one of the more recent methods available), but the user can specify any Brightway-supported impact assessment method. ARIA calculates each flow’s contribution to environmental indicators (e.g., global warming potential, acidification, ecotoxicity) and plots waterfall charts for easy visualisation.
+Once each foreground flow is matched to a background dataset, ARIA prints a DataFrame showing all necessary information, i.e. name, location, quantity, etc. Next, it automatically performs life cycle impact assessment using Brightway2. By default, the Environmental Footprint v3.1 characterisation method [@andreasi2023updated] is implemented, being one of the more recent methods available), but the user can specify any Brightway-supported impact assessment method. ARIA calculates each flow’s contribution to environmental indicators (e.g., global warming potential, acidification, ecotoxicity) and plots waterfall charts for easy visualisation.
 
 # Acknowledgments
 This work was supported by the Faraday Institution ReLiB project (grant number FIRG057). Add RSE
