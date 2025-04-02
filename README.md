@@ -4,7 +4,6 @@
 
 # ARIA<br>Artificial Intelligence for Sustainability Assessment
  
-
 ARIA is a Python package designed to streamline the rapid calculation of environmental impacts based on the Life Cycle Assessment (LCA) framework. By leveraging [Brightway2](https://github.com/brightway-lca) as its core infrastructure and integrating AI-based search and refinement, ARIA automates many of the tedious manual steps in inventory analysis—significantly reducing the time and expertise required for LCA studies.
 
 ARIA comes with detailed [documentation](https://github.com/kallitsis/ARIA/wiki) and [examples](https://github.com/kallitsis/ARIA/tree/eb61f4a9ef608844cf783e6e5ca9ec34aadcf99a/examples). 
@@ -40,7 +39,10 @@ cd aria
 pip install .
 ```
 
----
+## Dependencies
+
+In order to run ARIA, you will need an active [Ecoinvent license](https://ecoinvent.org/licenses/) and an [OpenAI API key](https://platform.openai.com/account/api-keys).
+Go to [Purchasing OpenAI API Credits](https://github.com/kallitsis/ARIA/wiki/Purchasing-OpenAI-API-credits) to learn more about how to set this up.
 
 ## License
 
