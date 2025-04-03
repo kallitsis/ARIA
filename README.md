@@ -112,4 +112,4 @@ ARIA is released under a [BSD 3-Clause License](LICENSE) and is fully open sourc
 
 ## Contributing
 
-When I make open source Insights>Community standards contributing guidelines, and code of conduct are requirements. 
+Contributions to ARIA are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for more.  
