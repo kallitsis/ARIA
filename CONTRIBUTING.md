@@ -34,6 +34,3 @@ In short, when you submit code changes, your submissions are understood to be un
 
 ## License
 By contributing, you agree that your contributions will be licensed under its [LICENSE](LICENSE).
-
-## References
-This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/master/CONTRIBUTING.md).
