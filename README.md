@@ -104,7 +104,7 @@ plot_lcia_waterfall_charts(processed_df)
 ## Citing ARIA
 
 If you use ARIA for a scientific paper, please cite our paper:
->placeholder
+Kallitsis, E., Offer, G., & Edge, J. (2025). ARIA:Artificial Intelligence for Sustainability Assessment. *EarthArXiv*. https://doi.org/10.31223/X5JF17
 
 ## License
 
