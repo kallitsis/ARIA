@@ -32,7 +32,8 @@ test = [
     "pytest>=8.3.5",
 ]
 
-[tool.setuptools]
-packages = { find = { where = ["ARIA"] } }
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ARIA"]
 
 [tool.pip-tools]
