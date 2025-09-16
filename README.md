@@ -1,6 +1,6 @@
 [![Python application](https://github.com/kallitsis/ARIA/actions/workflows/python-app.yml/badge.svg)](https://github.com/kallitsis/ARIA/actions/workflows/python-app.yml)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/kallitsis/ARIA)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
 
 # ARIA: Artificial Intelligence for Sustainability Assessment
  
@@ -103,8 +103,8 @@ plot_lcia_waterfall_charts(processed_df)
 ```
 ## Citing ARIA
 
-If you use ARIA for a scientific paper, please cite our paper:
->placeholder
+If you use ARIA for a scientific paper, please cite our preprint:<br>
+Kallitsis, E., Offer, G., & Edge, J. (2025). ARIA:Artificial Intelligence for Sustainability Assessment. *EarthArXiv*. https://doi.org/10.31223/X5JF17
 
 ## License
 
@@ -112,4 +112,4 @@ ARIA is released under a [BSD 3-Clause License](LICENSE) and is fully open sourc
 
 ## Contributing
 
-When I make open source Insights>Community standards contributing guidelines, and code of conduct are requirements. 
+Contributions to ARIA are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for more.  

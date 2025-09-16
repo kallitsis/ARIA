@@ -15,7 +15,7 @@ ECOINVENT_PASSWORD = os.getenv('ECOINVENT_PASSWORD')
 # If not set in environment, try to load from credentials.py
 if ECOINVENT_USERNAME is None or ECOINVENT_PASSWORD is None:
     try:
-        from credentials import ECOINVENT_USERNAME, ECOINVENT_PASSWORD
+        from .credentials import ECOINVENT_USERNAME, ECOINVENT_PASSWORD
     except ImportError:
         raise ImportError("Please create a 'credentials.py' file with your confidential keys.")
         

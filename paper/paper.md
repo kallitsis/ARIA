@@ -35,14 +35,15 @@ Inventory analysis is widely recognised as the most time consuming and expertise
 
 Brightway2 [@mutel2017brightway]  has been a transformative force in the LCA community by providing a robust, flexible, and open-source framework that facilitates detailed and reproducible assessments. Its open design allows direct interfacing with extensive databases such as Ecoinvent, laying a solid foundation for rigorous LCA modeling. Given that Brightway2 is more targeted towards the advanced user, the Activity Browser [@steubing2020activity] introduced a user-friendly interface to perform LCA, making common tasks easier and more intuitive.   
 
-ARIA complements such open-source LCA software by introducing a natural language processing layer that draws drom the qualitative dimensions of goal and scope definition to rapidly quantify environmental impacts based on Brightway2. It utilises the OpenAI API [@openai_api] to propose suitable datasets to represent the background system based on a set of default and user-defined rules.
+ARIA complements such open-source LCA software by introducing a natural language processing layer that draws from the qualitative dimensions of goal and scope definition to rapidly quantify environmental impacts based on Brightway2. It utilises the OpenAI API [@openai_api] to propose suitable datasets to represent the background system based on a set of default and user-defined rules.
 ARIA’s automation extends beyond simple dataset retrieval by incorporating contextual information from the goal and scope definition, such as geographical focus or technological dimensions, to refine dataset selection. This qualitative dimension, where the practitioner’s context and decisions directly influence the matching process, is frequently overlooked by purely quantitative tools. ARIA aims to make a valuable contribution to the open source LCA software landscape by accelerating inventory analysis and ultimately reducing the barrier to entry of LCA software. 
 
 # Operating Principles
-ARIA has been developed to automate the calculation of environmental impacts for a product or process. Rather than manually mapping each flow (e.g., material, energy use, transport) to an LCA dataset, ARIA integrates Brightway2 with AI-based search and refinement to streamline inventory analysis and impact assessment. Figure 1 provides a conceptual overview.
+ARIA has been developed to automate the calculation of environmental impacts for a product or process. Rather than manually mapping each flow (e.g. material, energy use, transport) to an LCA dataset, ARIA integrates Brightway2 with AI-based search and refinement to streamline inventory analysis and impact assessment. Figure 1 provides a conceptual overview.
 
-![Figure 1: Flowchart of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.](figures/aria_workflow.gv.png)
+![Figure 1](figures/aria_workflow.png)
 
+**Figure 1.** Schematic representation of the ARIA workflow depicting data processing, iterative matching, AI refinement, and impact assessment stages.
 1. Data input (foreground system)
 The user aggregates all product system inputs (mass flows, energy requirements, transport processes, etc.) in a spreadsheet named data_inputs.xlsx. Each row corresponds to a flow (e.g., “5 kg steel,” “10 kWh electricity”), ideally using ecoinvent-compatible units (e.g., kg, kWh, MJ) which are shown in the [European Platform on LCA website](https://eplca.jrc.ec.europa.eu/SDPDB/unitgroupList.xhtml;jsessionid=D0082C0606540373127C80107958A6E6?stock=default). The user can also include facility requirements (e.g., inert gases, water usage) if they factor into the functional unit.
 
@@ -59,6 +60,10 @@ The large language model then selects the most representative dataset from the l
 
 5. Building the inventory and performing impact assessment
 Once each foreground flow is matched to a background dataset, ARIA prints a DataFrame showing all necessary information, i.e. name, location, quantity, etc. Next, it automatically performs life cycle impact assessment using Brightway2. By default, the Environmental Footprint v3.1 characterisation method [@andreasi2023updated] is implemented, being one of the more recent methods available), but the user can specify any Brightway-supported impact assessment method. ARIA calculates each flow’s contribution to environmental indicators (e.g., global warming potential, acidification, ecotoxicity) and plots waterfall charts for easy visualisation.
+
+# Author contributions
+E.K.: Conceptualization, Methodology, Software, Writing - Original Draft, Writing - Review & Editing.
+G.O., J.E.: Supervision, Funding acquisition, Writing - Review & Editing.  
 
 # Acknowledgments
 This work was financially supported by the Faraday Institution ReLiB project (grant number FIRG057). Support from the Imperial College London Research Software Engineering (RSE) is acknowledged. 
