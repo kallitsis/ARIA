@@ -28,7 +28,7 @@ ARIA comes with detailed [documentation](https://github.com/kallitsis/ARIA/wiki)
 To install ARIA using `pip`, run the following command:
 
 ```bash
-pip install ARIA
+pip install git+https://github.com/kallitsis/ARIA.git
 ```
 
 or clone it in your machine:
