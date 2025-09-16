@@ -82,16 +82,18 @@ def process_dataframe(data_frame, db, client, user_message="", locations=None, v
         results_string = "\n".join(f"- {line}" for line in results_lines)
 
         prompt_content = (
-            f"You are assisting with LCA inventory mapping. User context: '{user_message}'.\n"
-            f"Activity to represent: '{activity_name}'.\n"
-            f"From the following candidate datasets (name | location | unit), choose exactly ONE by printing ONLY its exact name:\n"
-            f"{results_string}\n\n"
-            f"Selection rules:\n"
-            f"1) Prefer exact term matches for '{activity_name}'.\n"
-            f"2) If '{activity_name}' includes 'production', do NOT choose datasets containing 'waste' or 'treatment'.\n"
-            f"3) If '{activity_name}' includes 'waste', do NOT choose 'production'; prefer 'treatment'.\n"
-            f"4) If '{activity_name}' includes 'electricity', prefer 'market group for electricity, medium voltage' if present.\n"
-            f"5) Output ONLY the dataset name, nothing else."
+            f"Given the user instructions: '{user_message}', help choose one dataset to be used for '{activity_name}' from the Ecoinvent database. Follow these rules:\n"
+            f"related to '{activity_name}'.\n"
+            f"Choose one dataset to be used for '{activity_name}' under the following rules:\n"
+            f"1. If they exist, give highest preference to datasets that include the exact term '{activity_name}'.\n"
+            f"2. Print only the exact name of the recommended dataset as shown in '{results_string}' (no extra text).\n"
+            f"3. Always give preference to datasets that match the exact terms in '{activity_name}'.\n"
+            f"4. If '{activity_name}' includes 'production', do not choose a dataset that includes 'waste'.\n"
+            f"5. If '{activity_name}' includes 'waste', do not choose a dataset that includes 'production'; prefer 'treatment'.\n"
+            f"6. If '{activity_name}' includes 'electricity', prefer datasets that include the exact term 'market group for electricity, medium voltage'.\n"
+            f"7. Only print the name of the dataset as it was found in Ecoinvent, without any extra text.\n"
+            f"8. If '{activity_name}' does not include the term 'waste', never choose a dataset that includes this term or 'treatment'.\n"
+            f"9. If '{activity_name}' does not include the term 'electricity', never choose a dataset that includes the exact term 'electricity'.\n"
         )
 
         chat_completion = client.chat.completions.create(
