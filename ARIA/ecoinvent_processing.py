@@ -1,48 +1,43 @@
 # ecoinvent_processing.py
 
-import re
 import pandas as pd
+import re
 
 def process_ecoinvent_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Processes a DataFrame by cleaning and splitting the 'Ecoinvent process' column into 'Process' and 'Location',
-    as well as extracting 'Units'.
-    
-    Args:
-        df (pd.DataFrame): The DataFrame containing the 'Ecoinvent process' column to be processed.
-    
-    Returns:
-        pd.DataFrame: The processed DataFrame with 'Process', 'Location', and 'Units' columns.
+    Output columns: [Input/output, In/out, Units, Process, Location]
+    'Units', 'Process', 'Location' come from splitting 'Ecoinvent process' on '|'.
+    The original 'Ecoinvent process' column is dropped.
     """
-    # Ensure the 'Ecoinvent process' column exists
     if "Ecoinvent process" not in df.columns:
         raise KeyError("'Ecoinvent process' column not found in the DataFrame.")
 
-    # Function to clean the text in the 'Ecoinvent process' column
-    def clean_text(text: str) -> str:
-        # Allow word characters, spaces, commas, slashes, and hyphens
-        text = re.sub(r"[^\w\s,/%\-.]", '', text)
-        return text.strip()
+    s = df["Ecoinvent process"].astype(str)
 
-    # Clean the 'Ecoinvent process' column
-    df["Ecoinvent process"] = df["Ecoinvent process"].apply(clean_text)
+    # Remove a leading dash and surrounding spaces, but DO NOT 'clean' away pipes
+    s = s.str.replace(r"^\s*-\s*", "", regex=True).str.strip()
 
-    # Split the 'Ecoinvent process' column based on the last comma to isolate units
-    df["Ecoinvent process"] = df["Ecoinvent process"].str.lstrip("- ").str.strip()
-    df[["Process_location", "Units"]] = df["Ecoinvent process"].str.rsplit(",", n=1, expand=True)
-    df["Process_location"] = df["Process_location"].str.strip()
-    df["Units"] = df["Units"].str.strip()
+    # Split on a LITERAL pipe into at most 3 fields
+    parts = s.str.split(r"\|", n=2, expand=True)
 
-    # Drop the original 'Ecoinvent process' column
-    df.drop(columns=["Ecoinvent process"], inplace=True)
+    # If some rows don't have all three parts, add missing columns
+    while parts.shape[1] < 3:
+        parts[parts.shape[1]] = ""
 
-    # Split 'Process_location' based on the last comma to isolate location
-    df["Process_location"] = df["Process_location"].str.lstrip("- ").str.strip()
-    df[["Process", "Location"]] = df["Process_location"].str.rsplit(",", n=1, expand=True)
-    df["Process"] = df["Process"].str.strip()
-    df["Location"] = df["Location"].str.strip()
+    # Strip whitespace
+    parts[0] = parts[0].str.strip()
+    parts[1] = parts[1].str.strip()
+    parts[2] = parts[2].str.strip()
 
-    # Drop the temporary 'Process_location' column
-    df.drop(columns=["Process_location"], inplace=True)
+    # Build the final DataFrame (same structure you requested)
+    out = pd.DataFrame({
+        "Input/output": df["Input/output"],
+        "In/out": df["In/out"],
+        "Units": parts[2],     # from the ecoinvent string
+        "Process": parts[0],
+        "Location": parts[1],
+    })
 
-    return df
+    return out
+
+
