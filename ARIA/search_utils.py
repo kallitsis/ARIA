@@ -18,8 +18,8 @@ def build_search_query(term: str, extra: str = "") -> str:
     str
         A wildcard query string suitable for partial matching.
     """
-    terms = term.split()
-    return "*" + "* *".join(terms) + "*"
+    tokens = (f"{term} {extra}").split()
+    return " ".join(f"*{t}*" for t in tokens)
 
 
 def get_alternative_search_terms(client, search_term: str, extra_instructions: str = "") -> list[str]:

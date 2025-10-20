@@ -22,7 +22,6 @@ def process_dataframe(data_frame, db, client, user_message="", locations=None, v
         # 1) Deterministic search
         search_results = []
         for location in locations:
-            # If your bw2 doesn't support 'filter', do: db.search(...); then filter results by r['location'] == location
             search_results.extend(db.search(initial_query, limit=50, filter={"location": location}))
 
         # 2) If no results, try refined term from notes
