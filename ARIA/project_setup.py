@@ -17,7 +17,7 @@ if ECOINVENT_USERNAME is None or ECOINVENT_PASSWORD is None:
     try:
         from .credentials import ECOINVENT_USERNAME, ECOINVENT_PASSWORD
     except ImportError:
-        raise ImportError("Please create a 'credentials.py' file with your confidential keys.")
+        raise ImportError("Please set Ecoinvent credentials as environment variable or create a 'credentials.py' file with your confidential keys.")
         
 def setup_brightway_project(
     project_name: str,

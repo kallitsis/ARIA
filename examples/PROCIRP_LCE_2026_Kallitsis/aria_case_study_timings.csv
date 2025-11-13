@@ -1,0 +1,11 @@
+case_label,step,seconds,notes
+Battery production,Project & database setup,0.055,3.10.1 - cutoff
+Battery production,Open Excel (AppleScript),1.311,
+Battery production,User editing pause,4.519,Human-in-the-loop delay
+Battery production,Read & clean Excel,0.041,"usecols=A:C, nrows=18"
+Battery production,Create OpenAI client,0.0,
+Battery production,LLM-assisted mapping (search + refinement),32.288,process_dataframe
+Battery production,Ecoinvent post-processing,0.015,process_ecoinvent_dataframe
+Battery production,Impact assessment,318.681,run_impact_assessment
+Battery production,Per-flow mapping (derived),2.018,Flows=16
+Battery production,Automated total (excl. human pause),352.39,

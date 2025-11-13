@@ -1,16 +1,18 @@
 # ecoinvent_processing.py
 
 import pandas as pd
-import re
 
 def process_ecoinvent_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
     Output columns: [Input/output, In/out, Units, Process, Location]
     'Units', 'Process', 'Location' come from splitting 'Ecoinvent process' on '|'.
     The original 'Ecoinvent process' column is dropped.
+    If 'In/out' is missing in the input, it's created as an empty string column.
     """
     if "Ecoinvent process" not in df.columns:
         raise KeyError("'Ecoinvent process' column not found in the DataFrame.")
+    if "Input/output" not in df.columns:
+        raise KeyError("'Input/output' column not found in the DataFrame.")
 
     s = df["Ecoinvent process"].astype(str)
 
@@ -29,15 +31,19 @@ def process_ecoinvent_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     parts[1] = parts[1].str.strip()
     parts[2] = parts[2].str.strip()
 
-    # Build the final DataFrame (same structure you requested)
+    # Handle optional 'In/out' column
+    if "In/out" in df.columns:
+        in_out = df["In/out"]
+    else:
+        in_out = pd.Series([""] * len(df), index=df.index)
+
+    # Build the final DataFrame
     out = pd.DataFrame({
         "Input/output": df["Input/output"],
-        "In/out": df["In/out"],
-        "Units": parts[2],     # from the ecoinvent string
+        "In/out": in_out,
+        "Units": parts[2],
         "Process": parts[0],
         "Location": parts[1],
     })
 
     return out
-
-
