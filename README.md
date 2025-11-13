@@ -14,8 +14,8 @@ ARIA comes with detailed [documentation](https://github.com/kallitsis/ARIA/wiki)
   ARIA automatically matches user-supplied inputs with background datasets from Ecoinvent using natural language processing.
 - **Brightway2 Integration:**  
   Provides a robust and reproducible LCA modelling environment.
-- **AI-Powered Refinement:**  
-  Uses the OpenAI API to generate search terms and select representaive background daasets based on detailed rules and contextual instructions.
+- **LLM-Powered Refinement:**  
+  Uses the OpenAI API to generate search terms and select representaive background datasets based on detailed rules and contextual instructions.
 - **Flexible Impact Assessment:**  
   Supports multiple impact assessment methods (default: EF v3.1) to calculate key environmental indicators such as global warming potential, acidification, and water use.
 - **Visualisation:**  
